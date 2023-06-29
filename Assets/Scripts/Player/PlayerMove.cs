@@ -20,7 +20,8 @@ public class PlayerMove : MonoBehaviour
 
         Vector3 move = new Vector3(x, 0.0f, z);
 
-        if (move != Vector3.zero) {
+        if (move != Vector3.zero)
+        {
             this.animator.SetBool("isWalking", true);
         } else {
             this.animator.SetBool("isWalking", false);
