@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using TMPro;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -24,29 +25,24 @@ public class LevelGenerator : MonoBehaviour
             AsyncOperationHandle<GameObject> roomHandle =
                 Addressables.LoadAssetAsync<GameObject>($"Assets/Prefabs/Rooms/Room {roomId}.prefab");
             
-            //AsyncOperationHandle<GameObject> doorHandle =
-                //Addressables.LoadAssetAsync<GameObject>($"Assets/Prefabs/Door.prefab");
+            AsyncOperationHandle<GameObject> doorHandle =
+                Addressables.LoadAssetAsync<GameObject>($"Assets/Prefabs/Door.prefab");
 
             yield return roomHandle;
-            //yield return doorHandle;
+            yield return doorHandle;
 
             GameObject room = Instantiate(roomHandle.Result);
-            //GameObject door = Instantiate(doorHandle.Result);
-
-            //door.transform.Rotate(Vector3.up, 90);
-
-            // yield return new WaitUntil(() => !this.isWaiting);
-            // this.isWaiting = true;
+            GameObject door = Instantiate(doorHandle.Result);
 
             Room roomData = room.GetComponent<Room>();
             roomData.id = i;
+            door.GetComponentInChildren<TextMeshProUGUI>().text = $"{i}";
 
             if (this.lastDoor == null)
             {
                 room.transform.position = Vector3.zero;
                 this.lastDoor = roomData.outDoor;
                 this.forward = this.lastDoor.forward;
-                //door.transform.position = this.lastDoor.position;
             } else
             {
                 room.transform.position = this.lastDoor.position;
@@ -56,6 +52,7 @@ public class LevelGenerator : MonoBehaviour
                 {
                     Debug.Log("Destruído");
                     Destroy(room);
+                    Destroy(door);
                     continue;
                 }
 
@@ -65,7 +62,19 @@ public class LevelGenerator : MonoBehaviour
 
                 this.lastDoor = roomData.outDoor;
             }
+
+            door.transform.position = this.lastDoor.position;
+            door.transform.rotation = Quaternion.LookRotation(-this.lastDoor.right);
+
             i++;
         }
+
+        AsyncOperationHandle<GameObject> playerHandle =
+                Addressables.LoadAssetAsync<GameObject>($"Assets/Prefabs/Player.prefab");
+        
+        yield return playerHandle;
+
+        GameObject player = Instantiate(playerHandle.Result);
+        player.transform.position = Vector3.zero;
     }
 }
