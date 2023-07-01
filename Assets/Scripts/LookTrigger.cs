@@ -5,11 +5,11 @@ using UnityEngine;
 public abstract class LookTrigger : MonoBehaviour
 {
     protected bool isPlayerLooking = false;
-    public void OnPlayerLook()
+    public virtual void OnPlayerLook()
     {
         this.isPlayerLooking = true;
     }
-    public void OnPlayerStopLook()
+    public virtual void OnPlayerStopLook()
     {
         this.isPlayerLooking = false;
     }
