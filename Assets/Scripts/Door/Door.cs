@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Door : LookTrigger
 {
-    public Transform pivot;
     public Animator animator;
-    private bool isOpened = false;
+    protected bool isOpened = false;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && this.isPlayerLooking && !isOpened)
+        if (Input.GetKeyDown(KeyCode.E) && this.isPlayerLooking && !this.isOpened)
         {
             this.PlayAudio();
             this.ShowMessage("");
@@ -35,13 +34,13 @@ public class Door : LookTrigger
         this.ShowMessage("");
     }
 
-    private void ShowMessage(string message)
+    protected void ShowMessage(string message)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponentInChildren<HUD>().ShowFeedbackMessage(message);
     }
 
-    private void PlayAudio()
+    protected void PlayAudio()
     {
         int audioIndex = Random.Range(0, 2);
         GetComponents<AudioSource>()[audioIndex].Play();

@@ -8,7 +8,9 @@ using TMPro;
 public class LevelGenerator : MonoBehaviour
 {
     private Transform lastDoor;
-    private Vector3 forward;
+    private Vector3 initForward;
+    private Vector3 lastForward;
+    private Vector3 penultimateForward;
     public void Start()
     {
         StartCoroutine(Generate());
@@ -22,35 +24,30 @@ public class LevelGenerator : MonoBehaviour
             int roomId = Random.Range(2, 7);
             AsyncOperationHandle<GameObject> roomHandle =
                 Addressables.LoadAssetAsync<GameObject>($"Assets/Prefabs/Rooms/Room {roomId}.prefab");
-            
-            AsyncOperationHandle<GameObject> doorHandle =
-                Addressables.LoadAssetAsync<GameObject>($"Assets/Prefabs/Door/Door.prefab");
 
             yield return roomHandle;
-            yield return doorHandle;
 
             GameObject room = Instantiate(roomHandle.Result);
-            GameObject door = Instantiate(doorHandle.Result);
 
             Room roomData = room.GetComponent<Room>();
             roomData.id = i;
-            door.GetComponentInChildren<TextMeshProUGUI>().text = $"{i}";
 
             if (this.lastDoor == null)
             {
                 room.transform.position = Vector3.zero;
                 this.lastDoor = roomData.outDoor;
-                this.forward = this.lastDoor.forward;
+                this.initForward = this.lastDoor.forward;
+                this.lastForward = this.initForward;
+                this.penultimateForward = this.lastForward;
             } else
             {
                 room.transform.position = this.lastDoor.position;
                 room.transform.rotation = Quaternion.LookRotation(this.lastDoor.forward);
 
-                if (roomData.outDoor.forward == -this.forward)
+                if (roomData.outDoor.forward == -this.initForward || roomData.outDoor.forward == -this.lastForward || roomData.outDoor.forward == -this.penultimateForward)
                 {
                     Debug.Log("Destruído");
                     Destroy(room);
-                    Destroy(door);
                     continue;
                 }
 
@@ -59,16 +56,15 @@ public class LevelGenerator : MonoBehaviour
                 room.transform.Translate(-localDist);
 
                 this.lastDoor = roomData.outDoor;
+                this.penultimateForward = this.lastForward;
+                this.lastForward = roomData.outDoor.forward;
             }
-
-            door.transform.position = this.lastDoor.position;
-            door.transform.rotation = Quaternion.LookRotation(-this.lastDoor.right);
 
             i++;
         }
 
         AsyncOperationHandle<GameObject> playerHandle =
-                Addressables.LoadAssetAsync<GameObject>($"Assets/Prefabs/Player.prefab");
+                Addressables.LoadAssetAsync<GameObject>($"Assets/Prefabs/Player/Player.prefab");
         
         yield return playerHandle;
 

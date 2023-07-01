@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6232446576510162550}
   - component: {fileID: 258999542922926206}
   - component: {fileID: 1952071308206756861}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 2359762177738427809}
   - component: {fileID: 8419509031556728150}
   - component: {fileID: 5271729028990015356}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 5609352262775999409}
   - component: {fileID: 5120802034305889120}
   - component: {fileID: 2689206503343324553}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 8545218070621859023}
   - component: {fileID: 2937660416519388122}
   - component: {fileID: 844259546039829087}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LookTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,8 +289,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6099093165071788643}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.6, z: 1}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 2}
+  m_LocalPosition: {x: 0.000000007450588, y: 1.6, z: 0.8749999}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6933236935061922847}
@@ -383,7 +383,8 @@ GameObject:
   - component: {fileID: 7297945018257329353}
   - component: {fileID: 7297945018257329352}
   - component: {fileID: 6933236935061922846}
-  m_Layer: 0
+  - component: {fileID: 8361922950814714925}
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -451,6 +452,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+--- !u!95 &8361922950814714925
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6933236935061922833}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 09b25dfe537e0e44386217fccd97a9f2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6933236935090580588
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,7 +485,8 @@ GameObject:
   - component: {fileID: 6933236935090580584}
   - component: {fileID: 6933236935090580585}
   - component: {fileID: 6933236935090580586}
-  m_Layer: 0
+  - component: {fileID: 4648697838157797898}
+  m_Layer: 11
   m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -516,7 +539,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1079
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -550,6 +573,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBody: {fileID: 6933236935061922847}
   sensitivity: 200
+--- !u!114 &4648697838157797898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6933236935090580588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 6933236935090580587}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 1032
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!1 &7297773013604087104
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,7 +644,7 @@ GameObject:
   - component: {fileID: 8306745021984750943}
   - component: {fileID: 8187171548707938787}
   - component: {fileID: 3134649121680760110}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: FeedbackMessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
