@@ -9,8 +9,6 @@ public class LevelGenerator : MonoBehaviour
 {
     private Transform lastDoor;
     private Vector3 forward;
-    public bool isWaiting = true;
-
     public void Start()
     {
         StartCoroutine(Generate());
@@ -26,7 +24,7 @@ public class LevelGenerator : MonoBehaviour
                 Addressables.LoadAssetAsync<GameObject>($"Assets/Prefabs/Rooms/Room {roomId}.prefab");
             
             AsyncOperationHandle<GameObject> doorHandle =
-                Addressables.LoadAssetAsync<GameObject>($"Assets/Prefabs/Door.prefab");
+                Addressables.LoadAssetAsync<GameObject>($"Assets/Prefabs/Door/Door.prefab");
 
             yield return roomHandle;
             yield return doorHandle;
