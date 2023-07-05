@@ -21,7 +21,7 @@ public class LevelGenerator : MonoBehaviour
         int i = 1;
         while (i <= 100)
         {
-            int roomId = Random.Range(2, 7);
+            int roomId = Random.Range(2, 10);
             AsyncOperationHandle<GameObject> roomHandle =
                 Addressables.LoadAssetAsync<GameObject>($"Assets/Prefabs/Rooms/Room {roomId}.prefab");
 
