@@ -13,4 +13,10 @@ public abstract class LookTrigger : MonoBehaviour
     {
         this.isPlayerLooking = false;
     }
+
+    protected void ShowMessage(string message)
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponentInChildren<HUD>().ShowFeedbackMessage(message);
+    }
 }

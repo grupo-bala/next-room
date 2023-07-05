@@ -22,7 +22,7 @@ public class Door : LookTrigger
     {
         base.OnPlayerLook();
 
-        if (!isOpened)
+        if (!this.isOpened)
         {
             this.ShowMessage("[E] Abrir");
         }
@@ -32,12 +32,6 @@ public class Door : LookTrigger
     {
         base.OnPlayerStopLook();
         this.ShowMessage("");
-    }
-
-    protected void ShowMessage(string message)
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponentInChildren<HUD>().ShowFeedbackMessage(message);
     }
 
     protected void PlayAudio()
